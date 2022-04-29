@@ -51,81 +51,17 @@ repositories {
 
 dependencies {
 
-  implementation('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+')
   implementation('org.springframework.boot:spring-boot-starter-quartz')
-  implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7')
-  implementation('org.springframework.boot:spring-boot-starter-actuator')
-  implementation('org.springframework.boot:spring-boot-starter-security')
-  implementation("com.newrelic.agent.java:newrelic-api:5.6.0")
-  implementation("com.newrelic.logging:logback:1.1")
 
   implementation('org.springframework.boot:spring-boot-starter-web') {
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
     exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
   }
-  implementation('org.springframework.boot:spring-boot-starter-undertow')
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-  implementation("org.jetbrains.kotlin:kotlin-reflect") {
-    implementation('org.reflections:reflections:0.9.10') {
-      because 'reflect issues on pact test'
-    }
-  }
-  implementation('org.flywaydb:flyway-core')
-  implementation 'org.projectlombok:lombok:1.18.16'
-  implementation 'org.projectlombok:lombok:1.18.16'
-  runtime('mysql:mysql-connector-java')
-  implementation('org.springframework.boot:spring-boot-starter-data-redis')
-  implementation('org.springframework.boot:spring-boot-starter-data-jpa') {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-aop'
-    exclude group: 'org.springframework', module: 'spring-aspects'
-    implementation('org.springframework.data:spring-data-jpa:2.1.8.RELEASE') {
-      because 'blackduck'
-    }
-  }
-  implementation('io.pivotal.cfenv:java-cfenv:2.1.0.RELEASE')
-  implementation('org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16')
-
-  implementation("com.amazonaws:aws-java-sdk-ssm:$awsJavaSdkVersion")
-  implementation("com.amazonaws:aws-java-sdk-kinesis:$awsJavaSdkVersion")
-  implementation("com.amazonaws:aws-java-sdk-s3:$awsJavaSdkVersion")
-
-  implementation('com.github.ben-manes.caffeine:caffeine:2.7.0')
-
-  implementation(
-    "org.springframework.cloud:spring-cloud-starter-sleuth:${springCloudSleuthVersion}")
-  api project(':aws-queue-client')
-
-  testImplementation project(':junit5-retry')
-  testImplementation('org.springframework.boot:spring-boot-starter-test') {
-    exclude group: 'junit', module: 'junit'
-  }
-
-  testImplementation('au.com.dius:pact-jvm-provider-junit5_2.12:3.5.24') {
-    implementation('com.google.guava:guava:27.1-jre') {
-      because 'blackduck'
-    }
-    implementation("org.apache.httpcomponents:httpclient:4.5.9") {
-      because("avoid the breaking change introduced in apache client 4.5.7")
-    }
-  }
-  testImplementation('au.com.dius:pact-jvm-consumer-junit5_2.12:3.5.22') {
-    implementation('com.google.guava:guava:27.1-jre') {
-      because 'blackduck'
-    }
-    implementation("org.apache.httpcomponents:httpclient:4.5.9") {
-      because("avoid the breaking change introduced in apache client 4.5.7")
-    }
-  }
-
-  testImplementation 'org.springframework.security:spring-security-test'
 
   testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.0'
   testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.3.0'
   testImplementation('org.junit.jupiter:junit-jupiter-params:5.3.0')
 
   testImplementation('org.assertj:assertj-core:3.11.1')
-}
-
-test {
-  systemProperties['pact.rootDir'] = "$buildDir/../../pacts/"
 }
